@@ -1,0 +1,36 @@
+<div>
+  <h1>Transferir</h1>
+
+  <div class="form-group">
+    <label>Buscar Destinatario</label>
+    <input
+      type="text"
+      class="form-control"
+    />
+  </div>
+
+  <strong>Detalle del destinatario</strong>
+  <p>Nombre: </p>
+  <p>Correo: </p>
+  <p>Banco: </p>
+  <p>Tipo de cuenta: </p>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Monto</label>
+      <input
+        type="text"
+        formControlName="ammount"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['ammount'].errors }"
+      />
+      <div *ngIf="submitted && f['ammount'].errors" class="invalid-feedback">
+        <div *ngIf="f['ammount'].errors['required']">EL monto es requerido</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-success">Transferir</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,23 @@
+<div class="history">
+  <h1>Historial</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nombre destinatario</th>
+        <th scope="col">RUT</th>
+        <th scope="col">Banco</th>
+        <th scope="col">Tipo de cuenta</th>
+        <th scope="col">Monto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of transactions; index as i">
+        <td>{{ transaction.name }}</td>
+        <td>{{ transaction.rut }}</td>
+        <td>{{ transaction.bank }}</td>
+        <td>{{ transaction.accountType }}</td>
+        <td>{{ transaction.ammount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
