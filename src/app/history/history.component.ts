@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
+import { environment } from '../../environments/environment';
 
 interface Transaction {
   name: string;
@@ -8,21 +11,25 @@ interface Transaction {
   ammount: string
 }
 
-const TRANSACTIONS: Transaction[] = [
-  {
-    name: 'Cosme Fulanito',
-    rut: '11.111.111-1',
-    bank: 'Ripley',
-    accountType: 'Corriente',
-    ammount: '$10.000.000',
-  }
-]
-
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css']
 })
-export class HistoryComponent {
-  transactions = TRANSACTIONS;
+export class HistoryComponent implements OnInit{
+
+  transactions: Transaction[] | undefined = [];
+
+  constructor(private http:HttpClient) {
+  }
+
+  getTransactions () {
+    this.http.get<Transaction[]>(`${environment.apiUrl}transaction`).subscribe((res)=>{
+      this.transactions = res
+    });
+  }
+
+  ngOnInit() {
+    this.getTransactions()
+  }
 }

@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FirstComponent } from './first/first.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { StoreModule } from '@ngrx/store';
 import { HistoryComponent } from './history/history.component';
 import { SendComponent } from './send/send.component';
 import { NewAddressComponent } from './new-address/new-address.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RutModule } from 'rut-chileno';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FirstComponent,
     NavbarComponent,
     HistoryComponent,
     SendComponent,
@@ -26,6 +26,9 @@ import { NewAddressComponent } from './new-address/new-address.component';
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    RutModule,
+    FormsModule,
     StoreModule.forRoot({}, {})
   ],
   providers: [],

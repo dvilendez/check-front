@@ -1,35 +1,51 @@
 <div>
   <h1>Transferir</h1>
 
-  <div class="form-group">
-    <label>Buscar Destinatario</label>
-    <input
-      type="text"
-      class="form-control"
-    />
+  <div *ngIf="addressVisible" class="alert alert-danger d-flex align-items-center" role="alert">
+    <div>
+      Porfavor selecciona un destinatario.
+    </div>
+  </div>
+
+  <div *ngIf="creationVisible" class="alert alert-{{creationState}} d-flex align-items-center" role="alert">
+    <div>
+      {{creationMsg}}
+    </div>
+  </div>
+
+  <div class="form-group pb-3">
+    <label>Destinatarios</label>
+    <select
+      class="form-select"
+      aria-label=""
+      [(ngModel)]="selectedAddress"
+    >
+      <option *ngFor="let address of addresses" [ngValue]="address">{{address.name}} ({{address.rut}}) - {{address.bank}} - {{address.accountType}} - {{address.accountNumber}}</option>
+    </select>
   </div>
 
   <strong>Detalle del destinatario</strong>
-  <p>Nombre: </p>
-  <p>Correo: </p>
-  <p>Banco: </p>
-  <p>Tipo de cuenta: </p>
+  <p>Nombre: {{selectedAddress?.name}}</p>
+  <p>Correo: {{selectedAddress?.email}}</p>
+  <p>Banco: {{selectedAddress?.bank}}</p>
+  <p>Tipo de cuenta: {{selectedAddress?.accountType}}</p>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label>Monto</label>
       <input
-        type="text"
+        type="number"
         formControlName="ammount"
         class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f['ammount'].errors }"
       />
       <div *ngIf="submitted && f['ammount'].errors" class="invalid-feedback">
-        <div *ngIf="f['ammount'].errors['required']">EL monto es requerido</div>
+        <div *ngIf="f['ammount'].errors['required']">El monto es requerido</div>
+        <div *ngIf="f['ammount'].errors['min']">El monto debe ser mayor que 0</div>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group action">
       <button type="submit" class="btn btn-success">Transferir</button>
     </div>
   </form>

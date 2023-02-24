@@ -3,3 +3,14 @@
   /* background-color: red; */
   /* height: 500px; */
 }
+
+.action {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action button {
+  width: 200px;
+}
